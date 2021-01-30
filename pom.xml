@@ -28,6 +28,7 @@
     <modules>
 		<module>reservation-application</module>
         <module>reservation-common</module>
+        <module>adapters/reservation-persistence</module>
         <module>adapters/reservation-web</module>
         <module>reservation-infrastructure</module>
 	</modules>

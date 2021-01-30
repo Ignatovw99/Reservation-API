@@ -32,6 +32,7 @@ build/
 ### VS Code ###
 .vscode/
 /adapters/reservation-web/.mvn/wrapper/maven-wrapper.jar
+/adapters/reservation-persistence/.mvn/wrapper/maven-wrapper.jar
 /reservation-application/.mvn/wrapper/maven-wrapper.jar
 /reservation-common/.mvn/wrapper/maven-wrapper.jar
 /reservation-infrastructure/.mvn/wrapper/maven-wrapper.jar
