@@ -1,0 +1,22 @@
+spring:
+  profiles:
+    group:
+      default:
+        - ${reservation-api.modules.common}
+        - ${reservation-api.modules.application}
+        - ${reservation-api.modules.persistence}
+        - ${reservation-api.modules.web}
+      dev:
+        - default
+        - ${reservation-api.modules.persistence}-${reservation-api.profiles.dev} # override the properties
+        - ${reservation-api.modules.web}-${reservation-api.profiles.dev}
+
+reservation-api:
+  profiles:
+    dev: dev
+  #    prod: prod
+  modules:
+    web: web
+    persistence: persistence
+    application: domain
+    common: utils

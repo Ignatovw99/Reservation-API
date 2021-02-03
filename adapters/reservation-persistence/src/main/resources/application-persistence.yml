@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: "jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/reservation_api?createDatabaseIfNotExist=TRUE&allowPublicKeyRetrieval=true&useSSL=FALSE&serverTimezone=UTC&useUnicode=TRUE&characterEncoding=utf-8&autoReconnect=TRUE&zeroDateTimeBehavior=convertToNull&rewriteBatchedStatements=true&useServerPrepStmts=true&cachePrepStmts=true&prepStmtCacheSize=250&prepStmtCacheSqlLimit=2048"
+    username: "${DB_USERNAME:root}"
+    password: "${DB_PASSWORD:1234qwer}"
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 10
+  jpa:
+    properties:
+      hibernate:
+        dialect: "org.hibernate.dialect.MariaDBDialect"
+        format_sql: true
+        show_sql: true
+    hibernate:
+      ddl-auto: validate
+  liquibase:
+    change-log: classpath:/db/db.changelog-master.xml
