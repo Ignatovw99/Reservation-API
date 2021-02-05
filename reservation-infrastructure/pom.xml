@@ -16,7 +16,6 @@
 
     <properties>
         <java.version>11</java.version>
-        <auto-service.version>1.0-rc2</auto-service.version>
     </properties>
 
     <dependencies>
@@ -28,7 +27,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.4.2</version>
         </dependency>
 
         <dependency>
@@ -43,6 +41,11 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
 
         <dependency>
             <groupId>com.tngtech.archunit</groupId>
@@ -52,30 +55,31 @@
         </dependency>
 
         <dependency>
-            <groupId>com.google.auto.service</groupId>
-            <artifactId>auto-service</artifactId>
-            <version>${auto-service.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-
-        <dependency>
             <groupId>com.ignatov</groupId>
             <artifactId>reservation-api-web</artifactId>
-            <version>0.1.0</version>
         </dependency>
 
         <dependency>
             <groupId>com.ignatov</groupId>
-            <artifactId>reservation-api-application</artifactId>
-            <version>0.1.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.ignatov</groupId>
-            <artifactId>reservation-api-common</artifactId>
-            <version>0.1.0</version>
+            <artifactId>reservation-api-persistence</artifactId>
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
