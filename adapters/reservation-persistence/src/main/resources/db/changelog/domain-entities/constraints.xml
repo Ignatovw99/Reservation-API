@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!--    Constraints for the table domain_entities-->
+
+    <changeSet id="2021-02-12-12:15" author="Lyuboslav Ignatov">
+        <addNotNullConstraint tableName="domain_entities"
+                              columnName="name"
+                              columnDataType="varchar(60)" />
+
+        <addUniqueConstraint tableName="domain_entities"
+                             columnNames="name"
+                             constraintName="UN__domain_entities__name" />
+    </changeSet>
+
+</databaseChangeLog>
