@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!--    Constraints for the table data_types-->
+
+    <changeSet id="2021-02-12-15:42" author="Lyuboslav Ignatov">
+        <addNotNullConstraint tableName="data_types"
+                              columnName="full_class_name"
+                              columnDataType="varchar(200)" />
+
+        <addUniqueConstraint tableName="data_types"
+                             columnNames="full_class_name"
+                             constraintName="UN__data_types__full_class_name" />
+    </changeSet>
+
+</databaseChangeLog>
