@@ -2,51 +2,61 @@ package com.reservation.common.processor;
 
 import java.util.Objects;
 
-public class DomainEntityProperty<E, P> {
+public class DomainEntityProperty {
 
-    private final Class<E> domainEntityDataType;
+    private final Class<?> domainEntityClass;
 
-    private final Class<P> dataType;
+    private final Class<?> dataTypeClass;
 
     private final String name;
 
-    public DomainEntityProperty(Class<E> domainEntityDataType, Class<P> dataType, String name) {
-        this.domainEntityDataType = domainEntityDataType;
-        this.dataType = dataType;
+    private boolean isNew = true;
+
+    public DomainEntityProperty(Class<?> domainEntityClass, Class<?> dataTypeClass, String name) {
+        this.domainEntityClass = domainEntityClass;
+        this.dataTypeClass = dataTypeClass;
         this.name = name;
     }
 
-    public String getDomainEntityDataType() {
-        return domainEntityDataType.getSimpleName();
+    public String getDomainEntityFullName() {
+        return domainEntityClass.getName();
     }
 
-    public String getDataType() {
-        return dataType.getSimpleName();
+    public String getDataTypeFullName() {
+        return dataTypeClass.getName();
     }
 
     public String getName() {
         return name;
     }
 
+    public boolean isNew() {
+        return isNew;
+    }
+
+    public void setNew(boolean aNew) {
+        isNew = aNew;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof DomainEntityProperty)) return false;
-        DomainEntityProperty<?, ?> that = (DomainEntityProperty<?, ?>) o;
-        return Objects.equals(getDomainEntityDataType(), that.getDomainEntityDataType()) &&
+        DomainEntityProperty that = (DomainEntityProperty) o;
+        return Objects.equals(getDomainEntityFullName(), that.getDomainEntityFullName()) &&
                 Objects.equals(getName(), that.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getDomainEntityDataType(), getName());
+        return Objects.hash(getDomainEntityFullName(), getName());
     }
 
     @Override
     public String toString() {
         return "DomainEntityProperty{" +
-                "domainEntityType=" + domainEntityDataType +
-                ", type=" + dataType +
+                "domainEntityClass=" + domainEntityClass +
+                ", dataTypeClass=" + dataTypeClass +
                 ", name='" + name + '\'' +
                 '}';
     }

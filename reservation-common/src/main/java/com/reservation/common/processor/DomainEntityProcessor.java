@@ -150,8 +150,7 @@ public class DomainEntityProcessor extends AbstractProcessor {
 
         FieldSpec fieldWithProperties = FieldSpec
                 .builder(
-                        ParameterizedTypeName.get(ClassName.get(List.class),
-                                ParameterizedTypeName.get(ClassName.get(DomainEntityProperty.class), WildcardTypeName.subtypeOf(Object.class), WildcardTypeName.subtypeOf(Object.class))),
+                        ParameterizedTypeName.get(ClassName.get(List.class), TypeName.get(DomainEntityProperty.class)),
                         "propertiesOfEntities",
                         Modifier.PRIVATE, Modifier.STATIC)
                 .initializer("new $T<>()", ArrayList.class)
@@ -170,8 +169,7 @@ public class DomainEntityProcessor extends AbstractProcessor {
 
         MethodSpec allPropertiesGetterMethodBuilder = MethodSpec.methodBuilder(ENTITIES_PROPERTIES_WRAPPER_GETTER_METHOD_NAME)
                 .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
-                .returns(ParameterizedTypeName.get(ClassName.get(List.class),
-                        ParameterizedTypeName.get(ClassName.get(DomainEntityProperty.class), WildcardTypeName.subtypeOf(Object.class), WildcardTypeName.subtypeOf(Object.class))))
+                .returns(ParameterizedTypeName.get(ClassName.get(List.class), TypeName.get(DomainEntityProperty.class)))
                 .addStatement("return propertiesOfEntities")
                 .build();
 
@@ -213,9 +211,9 @@ public class DomainEntityProcessor extends AbstractProcessor {
             propertyFields.add(prop.getKey());
 
             FieldSpec name = FieldSpec
-                    .builder(ParameterizedTypeName.get(ClassName.get(DomainEntityProperty.class), domainEntityTypeName, TypeName.get(prop.getValue())),  prop.getKey())
+                    .builder(ClassName.get(DomainEntityProperty.class),  prop.getKey())
                     .addModifiers(Modifier.PRIVATE, Modifier.STATIC, Modifier.FINAL)
-                    .initializer("new $T<>($T.class, $T.class, $S)", DomainEntityProperty.class, ClassName.get(domainEntity.asType()), ClassName.get(prop.getValue()), prop.getKey())
+                    .initializer("new $T($T.class, $T.class, $S)", DomainEntityProperty.class, ClassName.get(domainEntity.asType()), ClassName.get(prop.getValue()), prop.getKey())
                     .build();
 
             builder.addField(name);
@@ -224,7 +222,7 @@ public class DomainEntityProcessor extends AbstractProcessor {
         MethodSpec getAllProperties = MethodSpec
                 .methodBuilder(ENTITY_PROPERTIES_GETTER_METHOD_NAME)
                 .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
-                .returns(ParameterizedTypeName.get(ClassName.get(List.class), ParameterizedTypeName.get(ClassName.get(DomainEntityProperty.class), domainEntityTypeName, WildcardTypeName.subtypeOf(Object.class))))
+                .returns(ParameterizedTypeName.get(ClassName.get(List.class), ClassName.get(DomainEntityProperty.class)))
                 .addStatement("return List.of($L)", String.join(", ", propertyFields))
                 .build();
 
