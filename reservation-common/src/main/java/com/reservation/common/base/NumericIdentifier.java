@@ -1,23 +1,12 @@
-package com.reservation.persistence.core.base;
+package com.reservation.common.base;
 
 import com.reservation.common.contract.Identifiable;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
 import java.util.Objects;
 
-@MappedSuperclass
-public class NumericJpaEntity implements Identifiable<Long> {
+public class NumericIdentifier implements Identifiable<Long> {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    protected NumericJpaEntity() {
-
-    }
 
     @Override
     public Long getId() {
@@ -34,7 +23,7 @@ public class NumericJpaEntity implements Identifiable<Long> {
         if (o == null) return false;
         if (this.getClass() != o.getClass()) return false; //Check if the subclasses are of the same type
         if (this == o) return true;
-        NumericJpaEntity that = (NumericJpaEntity) o;
+        NumericIdentifier that = (NumericIdentifier) o;
         return getId().equals(that.getId());
     }
 
