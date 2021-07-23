@@ -3,9 +3,9 @@ package com.reservation.persistence.service;
 import com.reservation.application.domain.entity.Location;
 import com.reservation.application.domain.entity.Property;
 import com.reservation.common.processor.DomainEntityProperty;
-import com.reservation.persistence.core.domain.DataTypeJpaEntity;
-import com.reservation.persistence.core.domain.DomainEntityJpaEntity;
-import com.reservation.persistence.core.domain.DomainEntityPropertyJpaEntity;
+import com.reservation.persistence.core.entity.DataTypeJpaEntity;
+import com.reservation.persistence.core.entity.DomainEntityJpaEntity;
+import com.reservation.persistence.core.entity.DomainEntityPropertyJpaEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
