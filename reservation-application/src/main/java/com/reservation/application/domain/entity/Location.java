@@ -1,9 +1,13 @@
 package com.reservation.application.domain.entity;
 
+import com.reservation.application.domain.entity.base.DomainEntity;
+import com.reservation.common.processor.DomainEntityProperty;
 import com.reservation.application.domain.entity.base.NumericIdentifier;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
+@DomainEntity
 public class Location extends NumericIdentifier {
 
     private String country;

@@ -1,10 +1,12 @@
 package com.reservation.application.domain.entity;
 
+import com.reservation.application.domain.entity.base.DomainEntity;
 import com.reservation.application.domain.entity.base.NumericIdentifier;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
+@DomainEntity
 public class Property extends NumericIdentifier {
 
     private String name;

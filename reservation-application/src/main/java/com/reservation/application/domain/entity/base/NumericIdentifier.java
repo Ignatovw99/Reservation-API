@@ -1,15 +1,19 @@
 package com.reservation.application.domain.entity.base;
 
+import com.reservation.common.contract.Identifiable;
+
 import java.util.Objects;
 
-public class NumericIdentifier {
+public class NumericIdentifier implements Identifiable<Long> {
 
     private Long id;
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
