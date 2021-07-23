@@ -144,6 +144,7 @@ public class DomainEntityProcessor extends AbstractProcessor {
     }
 
     private void generateDomainEntityPropertiesWrapperClass(List<String> domainEntityGeneratedClassNames) {
+        //TODO add check if list is empty -> then the file should be generated
         TypeSpec.Builder wrapperClassBuilder = TypeSpec
                 .classBuilder(DOMAIN_ENTITY_PROPERTIES_WRAPPER_NAME)
                 .addModifiers(Modifier.PUBLIC);

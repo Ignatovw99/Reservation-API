@@ -18,8 +18,16 @@ public class DomainEntityProperty {
         this.name = name;
     }
 
+    public Class<?> getDomainEntityClass() {
+        return domainEntityClass;
+    }
+
     public String getDomainEntityFullName() {
         return domainEntityClass.getName();
+    }
+
+    public Class<?> getDataTypeClass() {
+        return dataTypeClass;
     }
 
     public String getDataTypeFullName() {
