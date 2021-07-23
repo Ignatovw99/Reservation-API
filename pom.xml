@@ -52,21 +52,28 @@
                 <artifactId>reservation-api-web</artifactId>
                 <version>0.1.0</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.ignatov</groupId>
+                <artifactId>reservation-api-persistence</artifactId>
+                <version>0.1.0</version>
+            </dependency>
         </dependencies>
 	</dependencyManagement>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>${compiler.plugin.version}</version>
-                <configuration>
-                    <source>${source.version}</source>
-                    <target>${target.version}</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <profiles>
+        <profile>
+            <id>local</id>
+            <properties>
+                <spring.profiles.active>web,persistence</spring.profiles.active>
+            </properties>
+        </profile>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <profile.dev>dev</profile.dev>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>
