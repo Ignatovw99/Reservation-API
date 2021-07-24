@@ -1,6 +1,6 @@
 package com.reservation.persistence.core.entity;
 
-import com.reservation.persistence.core.base.NumericJpaEntity;
+import com.reservation.common.base.NumericJpaIdentifier;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "domain_entity_properties")
-public class DomainEntityPropertyJpaEntity extends NumericJpaEntity {
+public class DomainEntityPropertyJpaEntity extends NumericJpaIdentifier {
 
     @Column(name = "name")
     @NotNull

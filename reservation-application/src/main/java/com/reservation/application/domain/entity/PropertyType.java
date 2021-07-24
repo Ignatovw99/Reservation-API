@@ -1,12 +1,24 @@
 package com.reservation.application.domain.entity;
 
-import com.reservation.application.domain.entity.base.NumericIdentifier;
+import com.reservation.application.domain.entity.base.DomainEntity;
+import com.reservation.common.base.NumericJpaIdentifier;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Objects;
 
-public class PropertyType extends NumericIdentifier {
+@DomainEntity
+@Entity
+@Table(name = "property_type")
+public class PropertyType extends NumericJpaIdentifier {
 
     private String name;
+
+    private Boolean requiresPrivate;
+
+    private Boolean allowsMultipleRooms;
+
+    private Boolean requiresAlternative;
 
     public String getName() {
         return name;
@@ -14,6 +26,30 @@ public class PropertyType extends NumericIdentifier {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Boolean getRequiresPrivate() {
+        return requiresPrivate;
+    }
+
+    public void setRequiresPrivate(Boolean requiresPrivate) {
+        this.requiresPrivate = requiresPrivate;
+    }
+
+    public Boolean getAllowsMultipleRooms() {
+        return allowsMultipleRooms;
+    }
+
+    public void setAllowsMultipleRooms(Boolean allowsMultipleRooms) {
+        this.allowsMultipleRooms = allowsMultipleRooms;
+    }
+
+    public Boolean getRequiresAlternative() {
+        return requiresAlternative;
+    }
+
+    public void setRequiresAlternative(Boolean requiresAlternative) {
+        this.requiresAlternative = requiresAlternative;
     }
 
     @Override
@@ -32,8 +68,10 @@ public class PropertyType extends NumericIdentifier {
     @Override
     public String toString() {
         return "PropertyType{" +
-                "id=" + super.getId() +
                 "name='" + name + '\'' +
+                ", requiresPrivate=" + requiresPrivate +
+                ", allowsMultipleRooms=" + allowsMultipleRooms +
+                ", requiresAlternative=" + requiresAlternative +
                 '}';
     }
 }
