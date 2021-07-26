@@ -2,7 +2,7 @@ package com.reservation.persistence.database;
 
 import com.reservation.application.domain.entity.DomainEntityPropertiesWrapper;
 import com.reservation.common.processor.DomainEntityProperty;
-import com.reservation.persistence.BeanAwareSpringLiquibase;
+import com.reservation.persistence.config.BeanAwareSpringLiquibase;
 import com.reservation.persistence.core.entity.DataTypeJpaEntity;
 import com.reservation.persistence.core.entity.DomainEntityJpaEntity;
 import com.reservation.persistence.core.entity.DomainEntityPropertyJpaEntity;

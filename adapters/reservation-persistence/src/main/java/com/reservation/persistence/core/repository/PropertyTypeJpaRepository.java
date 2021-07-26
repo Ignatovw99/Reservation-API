@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PropertyTypeJpaRepository extends JpaRepository<PropertyType, Long> {
+
+    PropertyType findByName(String name);
 }
