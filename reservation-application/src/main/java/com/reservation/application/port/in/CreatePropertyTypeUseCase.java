@@ -1,7 +1,9 @@
 package com.reservation.application.port.in;
 
 import com.reservation.application.domain.entity.PropertyType;
+import com.reservation.common.contract.CommandDomainEntityMapper;
 import com.reservation.common.validation.SelfValidating;
+import org.mapstruct.Mapper;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -57,5 +59,10 @@ public interface CreatePropertyTypeUseCase {
         public NonUniquePropertyTypeNameException(String propertyTypeName) {
             super(String.format(MESSAGE, propertyTypeName));
         }
+    }
+
+    @Mapper(componentModel = "spring")
+    interface UseCaseMapper extends CommandDomainEntityMapper<Command, PropertyType> {
+
     }
 }
