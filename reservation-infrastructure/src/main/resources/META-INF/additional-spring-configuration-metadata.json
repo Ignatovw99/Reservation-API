@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "reservation-api.modules.persistence",
+      "type": "java.lang.String",
+      "description": "Description for reservation-api.modules.persistence."
+    }
+  ] }
