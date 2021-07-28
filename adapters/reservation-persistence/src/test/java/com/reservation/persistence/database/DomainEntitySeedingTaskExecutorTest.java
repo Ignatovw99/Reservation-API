@@ -23,7 +23,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@PersistenceContextTest
+@PersistenceContextTest(properties = "spring.liquibase.contexts=dev")
 class DomainEntitySeedingTaskExecutorTest {
 
     @Autowired
