@@ -20,6 +20,16 @@ public class PropertyType extends NumericJpaIdentifier {
 
     private Boolean requiresAlternative;
 
+    public PropertyType() {
+    }
+
+    public PropertyType(String name, Boolean requiresPrivate, Boolean allowsMultipleRooms, Boolean requiresAlternative) {
+        this.name = name;
+        this.requiresPrivate = requiresPrivate;
+        this.allowsMultipleRooms = allowsMultipleRooms;
+        this.requiresAlternative = requiresAlternative;
+    }
+
     public String getName() {
         return name;
     }
