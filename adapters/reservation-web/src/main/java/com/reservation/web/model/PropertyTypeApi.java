@@ -4,7 +4,7 @@ import com.reservation.common.base.NumericIdentifier;
 
 import java.util.Objects;
 
-public class PropertyTypeAPI extends NumericIdentifier {
+public class PropertyTypeApi extends NumericIdentifier {
 
     private String name;
 
@@ -49,8 +49,8 @@ public class PropertyTypeAPI extends NumericIdentifier {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof PropertyTypeAPI)) return false;
-        PropertyTypeAPI that = (PropertyTypeAPI) o;
+        if (!(o instanceof PropertyTypeApi)) return false;
+        PropertyTypeApi that = (PropertyTypeApi) o;
         return Objects.equals(getName(), that.getName());
     }
 

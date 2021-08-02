@@ -5,7 +5,7 @@ package com.reservation.common.contract;
  * @param <D> Domain entity type
  * @param <A> API model type
  */
-public interface DomainEntityAPIMapper<D, A> {
+public interface DomainEntityApiMapper<D, A> {
 
     A toApiModel(D domainEntity);
 }
