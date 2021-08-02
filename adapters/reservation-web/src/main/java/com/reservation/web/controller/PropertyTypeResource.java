@@ -10,8 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.net.URI;
-
 @WebAdapter(valueURL = "/api/property-type")
 class PropertyTypeResource {
 
@@ -26,12 +24,13 @@ class PropertyTypeResource {
     }
 
     @PostMapping
-    public ResponseEntity<PropertyTypeAPI> createPropertyTypeHandler(@RequestBody PropertyTypeAPI propertyTypeAPI) {
+    public ResponseEntity<PropertyTypeAPI> createPropertyType(@RequestBody PropertyTypeAPI propertyTypeAPI) {
+
         CreatePropertyTypeUseCase.Command command = mapper.toCreatePropertyTypeCommand(propertyTypeAPI);
         PropertyType createdPropertyType = createPropertyTypeUseCase.createPropertyType(command);
         PropertyTypeAPI result = mapper.toApiModel(createdPropertyType);
-        return ResponseEntity
-                .created(URI.create(String.format("/api/property-type/%d", result.getId())))
-                .body(result);
+
+        return APIController
+                .post(result, "/api/property-type/%d", result.getId());
     }
 }
