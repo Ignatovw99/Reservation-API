@@ -5,17 +5,13 @@ import com.reservation.application.port.out.FindPropertyTypeByNamePort;
 import com.reservation.application.port.out.PersistPropertyTypePort;
 import com.reservation.common.component.PersistenceAdapter;
 import com.reservation.persistence.core.repository.PropertyTypeJpaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 
 @PersistenceAdapter
+@RequiredArgsConstructor
 class PropertyTypePersistenceAdapter implements PersistPropertyTypePort, FindPropertyTypeByNamePort {
 
     private final PropertyTypeJpaRepository propertyTypeJpaRepository;
-
-    @Autowired
-    PropertyTypePersistenceAdapter(PropertyTypeJpaRepository propertyTypeJpaRepository) {
-        this.propertyTypeJpaRepository = propertyTypeJpaRepository;
-    }
 
     @Override
     public PropertyType savePropertyType(PropertyType propertyType) {

@@ -9,9 +9,6 @@ public class BeanAwareSpringLiquibase extends SpringLiquibase {
 
     private static ResourceLoader applicationContext;
 
-    public BeanAwareSpringLiquibase() {
-    }
-
     public static <T> T getBean(Class<T> beanClass) {
         if (ApplicationContext.class.isInstance(applicationContext)) {
             return ((ApplicationContext)applicationContext).getBean(beanClass);

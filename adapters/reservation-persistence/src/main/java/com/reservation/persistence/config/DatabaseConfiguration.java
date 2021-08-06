@@ -1,6 +1,8 @@
 package com.reservation.persistence.config;
 
 import liquibase.integration.spring.SpringLiquibase;
+import lombok.AllArgsConstructor;
+import lombok.Setter;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -16,24 +18,13 @@ import javax.sql.DataSource;
 @EnableJpaRepositories(basePackages = {"com.reservation.persistence.core.repository"})
 @EntityScan(basePackages = {"com.reservation.application.domain.entity", "com.reservation.persistence.core.entity"})
 @EnableConfigurationProperties(LiquibaseProperties.class)
+@AllArgsConstructor
+@Setter
 public class DatabaseConfiguration {
 
     private DataSource dataSource;
 
     private LiquibaseProperties properties;
-
-    public DatabaseConfiguration(DataSource dataSource, LiquibaseProperties properties) {
-        this.dataSource = dataSource;
-        this.properties = properties;
-    }
-
-    public void setDataSource(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
-
-    public void setProperties(LiquibaseProperties properties) {
-        this.properties = properties;
-    }
 
     @Bean
     public SpringLiquibase liquibase() {

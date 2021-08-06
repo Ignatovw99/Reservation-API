@@ -35,7 +35,6 @@ public class DomainEntitySeedingTaskExecutor implements CustomTaskChange {
 
     private ResourceAccessor resourceAccessor;
 
-
     private void injectJpaRepositories() {
         domainEntityJpaRepository = BeanAwareSpringLiquibase.getBean(DomainEntityJpaRepository.class);
         domainEntityPropertyJpaRepository = BeanAwareSpringLiquibase.getBean(DomainEntityPropertyJpaRepository.class);

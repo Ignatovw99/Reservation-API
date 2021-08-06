@@ -15,7 +15,6 @@
     <description>Common utils module for the Reservation API</description>
 
     <properties>
-        <java.version>11</java.version>
         <auto-service.version>1.0-rc2</auto-service.version>
     </properties>
 
