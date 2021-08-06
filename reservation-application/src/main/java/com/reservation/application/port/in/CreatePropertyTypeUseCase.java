@@ -3,6 +3,7 @@ package com.reservation.application.port.in;
 import com.reservation.application.domain.entity.PropertyType;
 import com.reservation.common.contract.CommandDomainEntityMapper;
 import com.reservation.common.validation.SelfValidating;
+import lombok.Getter;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -13,6 +14,7 @@ public interface CreatePropertyTypeUseCase {
 
     PropertyType createPropertyType(Command propertyTypeCommand) throws NonUniquePropertyTypeNameException;
 
+    @Getter
     final class Command extends SelfValidating<Command> {
 
         @NotNull
@@ -34,22 +36,6 @@ public interface CreatePropertyTypeUseCase {
             this.allowsMultipleRooms = allowsMultipleRooms;
             this.requiresAlternative = requiresAlternative;
             super.validateSelf();
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public Boolean getRequiresPrivate() {
-            return requiresPrivate;
-        }
-
-        public Boolean getAllowsMultipleRooms() {
-            return allowsMultipleRooms;
-        }
-
-        public Boolean getRequiresAlternative() {
-            return requiresAlternative;
         }
     }
 

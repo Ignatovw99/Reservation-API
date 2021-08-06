@@ -15,7 +15,6 @@
     <description>Domain Application Module of the Reservation API</description>
 
     <properties>
-        <java.version>11</java.version>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
     </properties>
 
@@ -79,6 +78,16 @@
                             <groupId>com.ignatov</groupId>
                             <artifactId>reservation-api-common</artifactId>
                             <version>0.1.0</version>
+                        </path>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok-mapstruct-binding</artifactId>
+                            <version>0.2.0</version>
+                        </path>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>

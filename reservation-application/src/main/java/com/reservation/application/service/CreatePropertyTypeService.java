@@ -5,11 +5,12 @@ import com.reservation.application.port.in.CreatePropertyTypeUseCase;
 import com.reservation.application.port.out.FindPropertyTypeByNamePort;
 import com.reservation.application.port.out.PersistPropertyTypePort;
 import com.reservation.common.component.UseCase;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 
 import java.util.Objects;
 
 @UseCase
+@RequiredArgsConstructor
 class CreatePropertyTypeService implements CreatePropertyTypeUseCase {
 
     private final PersistPropertyTypePort savePropertyTypePort;
@@ -17,16 +18,6 @@ class CreatePropertyTypeService implements CreatePropertyTypeUseCase {
     private final FindPropertyTypeByNamePort findPropertyTypeByNamePort;
 
     private final UseCaseMapper mapper;
-
-    @Autowired
-    public CreatePropertyTypeService(PersistPropertyTypePort savePropertyTypePort,
-                                     FindPropertyTypeByNamePort findPropertyTypeByNamePort,
-                                     UseCaseMapper mapper) {
-
-        this.savePropertyTypePort = savePropertyTypePort;
-        this.findPropertyTypeByNamePort = findPropertyTypeByNamePort;
-        this.mapper = mapper;
-    }
 
     @Override
     public PropertyType createPropertyType(Command propertyTypeCommand) throws NonUniquePropertyTypeNameException {
