@@ -5,7 +5,7 @@ import java.util.Set;
 
 public class SelfValidating<T> {
 
-    private Validator validator;
+    private final Validator validator;
 
     protected SelfValidating() {
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
