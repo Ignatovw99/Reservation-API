@@ -32,10 +32,7 @@ public class DomainEntityPropertyJpaEntity extends NumericJpaIdentifier {
     private DataTypeJpaEntity dataType;
 
     public boolean hasDataType(String dataTypeFullName) {
-        if (Objects.isNull(getDataType())) {
-            return false;
-        } else {
-            return getDataType().getFullClassName().equals(dataTypeFullName);
-        }
+        return getDataType().getFullClassName()
+                .equals(dataTypeFullName);
     }
 }
