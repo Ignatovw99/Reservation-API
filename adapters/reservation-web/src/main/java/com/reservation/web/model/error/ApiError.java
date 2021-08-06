@@ -1,11 +1,13 @@
 package com.reservation.web.model.error;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Getter
 public class ApiError {
 
     private HttpStatus status;
@@ -39,25 +41,5 @@ public class ApiError {
         this.status = status;
         this.message = message;
 //        this.debugMessage = ex.getLocalizedMessage();
-    }
-
-    public HttpStatus getStatus() {
-        return status;
-    }
-
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public String getDebugMessage() {
-        return debugMessage;
-    }
-
-    public List<ApiSubError> getSubErrors() {
-        return subErrors;
     }
 }

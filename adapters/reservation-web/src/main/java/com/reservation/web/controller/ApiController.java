@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public final class ApiController {
 
-    public static <I, T extends Identifiable<I>> ResponseEntity<T> post(T response) {
+    public static <I, T extends Identifiable<I>> ResponseEntity<T> postResponse(T response) {
         String location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(response.getId())
