@@ -18,7 +18,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(CreatePropertyTypeUseCase.NonUniquePropertyTypeNameException.class)
     protected ResponseEntity<ApiError> handlerNonUnique(CreatePropertyTypeUseCase.NonUniquePropertyTypeNameException ex) {
 
-        ApiError error = new ApiError(HttpStatus.NOT_FOUND, ex.getMessage(), ex);
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+        ApiError error = new ApiError(HttpStatus.CONFLICT, ex.getMessage(), ex);
+        return new ResponseEntity<>(error, HttpStatus.CONFLICT);
     }
 }
