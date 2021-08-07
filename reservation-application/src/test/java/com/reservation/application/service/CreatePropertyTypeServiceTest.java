@@ -73,7 +73,12 @@ public class CreatePropertyTypeServiceTest {
     @BeforeEach
     public void setup() {
         command = new CreatePropertyTypeUseCase.Command(NAME, REQUIRES_PRIVATE, ALLOWS_MULTIPLE_ROOMS, REQUIRES_ALTERNATIVE);
-        propertyType = new PropertyType(NAME, REQUIRES_PRIVATE, ALLOWS_MULTIPLE_ROOMS, REQUIRES_ALTERNATIVE);
+        propertyType = PropertyType.builder()
+                    .name(NAME)
+                    .allowsMultipleRooms(ALLOWS_MULTIPLE_ROOMS)
+                    .requiresPrivate(REQUIRES_PRIVATE)
+                    .requiresAlternative(REQUIRES_ALTERNATIVE)
+                .build();
 
         when(mapper.toDomainEntity(any(CreatePropertyTypeUseCase.Command.class)))
                 .thenReturn(propertyType);

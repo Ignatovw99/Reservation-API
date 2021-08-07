@@ -22,7 +22,12 @@ class PropertyTypePersistenceAdapterTest {
     public void findPropertyTypeByName_WhenPropertyTypeWithGivenNameExists_shouldReturnIt() {
         final String name = "Hotel";
 
-        PropertyType propertyType = new PropertyType(name, true, false, true);
+        PropertyType propertyType = PropertyType.builder()
+                    .name(name)
+                    .requiresPrivate(true)
+                    .allowsMultipleRooms(false)
+                    .requiresAlternative(true)
+                .build();
         propertyTypeJpaRepository.saveAndFlush(propertyType);
 
         PropertyType actualType = propertyTypePersistenceAdapter.findPropertyTypeByName(name);
@@ -46,10 +51,20 @@ class PropertyTypePersistenceAdapterTest {
     public void savePropertyType_WhenThereIsAlreadyTypeWithTheGivenName_shouldThrowException() {
         final String name = "Hotel";
 
-        PropertyType propertyType = new PropertyType(name, true, false, true);
+        PropertyType propertyType = PropertyType.builder()
+                    .name(name)
+                    .requiresPrivate(true)
+                    .allowsMultipleRooms(false)
+                    .requiresAlternative(true)
+                .build();
         propertyTypeJpaRepository.saveAndFlush(propertyType);
 
-        PropertyType propertyType2 = new PropertyType(name, true, false, true);
+        PropertyType propertyType2 = PropertyType.builder()
+                .name(name)
+                .requiresPrivate(true)
+                .allowsMultipleRooms(false)
+                .requiresAlternative(true)
+                .build();
         assertThrows(
                 DataIntegrityViolationException.class,
                 () -> propertyTypePersistenceAdapter.savePropertyType(propertyType2)
@@ -60,7 +75,12 @@ class PropertyTypePersistenceAdapterTest {
     public void savePropertyType_WhenThereIsNotTypeWithTheGivenName_shouldPersistIt() {
         final String name = "Hotel";
 
-        PropertyType propertyType = new PropertyType(name, true, false, true);
+        PropertyType propertyType = PropertyType.builder()
+                    .name(name)
+                    .requiresPrivate(true)
+                    .allowsMultipleRooms(false)
+                    .requiresAlternative(true)
+                .build();
         assertNull(propertyType.getId());
 
         PropertyType savedPropertyType = propertyTypePersistenceAdapter.savePropertyType(propertyType);
