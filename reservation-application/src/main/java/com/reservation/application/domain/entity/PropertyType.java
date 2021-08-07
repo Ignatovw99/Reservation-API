@@ -12,9 +12,7 @@ import javax.persistence.Table;
 @Table(name = "property_type")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
-@Builder
 public class PropertyType extends NumericJpaIdentifier {
 
     @EqualsAndHashCode.Include
@@ -25,4 +23,17 @@ public class PropertyType extends NumericJpaIdentifier {
     private Boolean allowsMultipleRooms;
 
     private Boolean requiresAlternative;
+
+    @Builder
+    public PropertyType(final Long id,
+                        final String name,
+                        final Boolean requiresPrivate,
+                        final Boolean allowsMultipleRooms,
+                        final Boolean requiresAlternative) {
+        super(id);
+        this.name = name;
+        this.requiresPrivate = requiresPrivate;
+        this.allowsMultipleRooms = allowsMultipleRooms;
+        this.requiresAlternative = requiresAlternative;
+    }
 }
