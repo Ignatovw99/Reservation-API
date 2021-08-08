@@ -6,11 +6,13 @@ import com.reservation.application.port.out.FindPropertyTypeByNamePort;
 import com.reservation.application.port.out.PersistPropertyTypePort;
 import com.reservation.common.component.UseCase;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 
 @UseCase
 @RequiredArgsConstructor
+@Slf4j
 class CreatePropertyTypeService implements CreatePropertyTypeUseCase {
 
     private final PersistPropertyTypePort savePropertyTypePort;
@@ -21,6 +23,7 @@ class CreatePropertyTypeService implements CreatePropertyTypeUseCase {
 
     @Override
     public PropertyType createPropertyType(Command propertyTypeCommand) throws NonUniquePropertyTypeNameException {
+        log.info("Creating a new property type: {}", propertyTypeCommand);
         requireUniqueName(propertyTypeCommand.getName());
         PropertyType propertyType = mapper.toDomainEntity(propertyTypeCommand);
         return savePropertyTypePort.savePropertyType(propertyType);
@@ -33,6 +36,7 @@ class CreatePropertyTypeService implements CreatePropertyTypeUseCase {
 
     private void requireUniqueName(String name) throws NonUniquePropertyTypeNameException {
         if (existsByName(name)) {
+            log.error("Creating property type failed, property type with name \"{}\" already exists", name);
             throw new NonUniquePropertyTypeNameException(name);
         }
     }

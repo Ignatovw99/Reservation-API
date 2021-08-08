@@ -4,6 +4,7 @@ import com.reservation.application.domain.entity.PropertyType;
 import com.reservation.common.contract.CommandDomainEntityMapper;
 import com.reservation.common.validation.SelfValidating;
 import lombok.Getter;
+import lombok.ToString;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -15,6 +16,7 @@ public interface CreatePropertyTypeUseCase {
     PropertyType createPropertyType(Command propertyTypeCommand) throws NonUniquePropertyTypeNameException;
 
     @Getter
+    @ToString
     final class Command extends SelfValidating<Command> {
 
         @NotNull
