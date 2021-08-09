@@ -11,12 +11,14 @@
     <include file="db/changelog/data-types/ddl.xml" relativeToChangelogFile="false" />
     <include file="db/changelog/domain-entity-properties/ddl.xml" relativeToChangelogFile="false" />
     <include file="db/changelog/property-type/ddl.xml" relativeToChangelogFile="false" />
+    <include file="db/changelog/properties/ddl.xml" relativeToChangelogFile="false" />
 
 
     <!--    Constraints changelogs-->
     <include file="db/changelog/domain-entities/constraints.xml" relativeToChangelogFile="false" />
     <include file="db/changelog/data-types/constraints.xml" relativeToChangelogFile="false" />
     <include file="db/changelog/domain-entity-properties/constraints.xml" relativeToChangelogFile="false" />
+    <include file="db/changelog/properties/constraints.xml" relativeToChangelogFile="false" />
 
     <changeSet id="2021-07-23-15:10" author="Lyuboslav Ignatov" runAlways="true" context="!test">
         <customChange class="com.reservation.persistence.database.DomainEntitySeedingTaskExecutor">

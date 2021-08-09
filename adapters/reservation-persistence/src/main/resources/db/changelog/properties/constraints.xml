@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!--    Constraints for the table properties-->
+
+    <changeSet id="2021-08-09-17:00" author="Lyuboslav Ignatov">
+
+        <addForeignKeyConstraint baseTableName="properties"
+                                 baseColumnNames="property_type_id"
+                                 constraintName="fk__properties__property_types"
+                                 referencedTableName="property_type"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+
+    </changeSet>
+
+</databaseChangeLog>
