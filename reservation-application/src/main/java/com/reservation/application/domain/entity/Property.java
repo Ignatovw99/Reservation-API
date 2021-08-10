@@ -1,142 +1,75 @@
 package com.reservation.application.domain.entity;
 
 import com.reservation.application.domain.entity.base.DomainEntity;
-import com.reservation.application.domain.entity.base.NumericIdentifier;
+import com.reservation.common.base.NumericJpaIdentifier;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-import java.util.Objects;
+import javax.persistence.*;
 
 @DomainEntity
-public class Property extends NumericIdentifier {
+@Entity
+@Table(name = "properties")
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
+public class Property extends NumericJpaIdentifier {
 
+    @EqualsAndHashCode.Include
     private String name;
 
-    private Byte stars;
+    private Byte starRatings;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "property_type_id")
     private PropertyType type;
-
-    private Location location;
-
-    private String email;
-
-    private String telephoneNumber;
 
     private String description;
 
-    private LocalDate openedIn;
+    private String country;
 
-    private LocalDate createdAt;
+    private String region;
 
-    private LocalDate offeredSince;
+    private String street;
 
-    public String getName() {
-        return name;
-    }
+    private Integer houseNumber;
 
-    public void setName(String name) {
+    private String zip;
+
+    private String contactName;
+
+    private String contactNumber;
+
+    private String contactEmail;
+
+    @Builder
+    public Property(Long id,
+                    String name,
+                    Byte starRatings,
+                    PropertyType type,
+                    String description,
+                    String country,
+                    String region,
+                    String street,
+                    Integer houseNumber,
+                    String zip,
+                    String contactName,
+                    String contactNumber,
+                    String contactEmail) {
+        super(id);
         this.name = name;
-    }
-
-    public Byte getStars() {
-        return stars;
-    }
-
-    public void setStars(Byte stars) {
-        this.stars = stars;
-    }
-
-    public PropertyType getType() {
-        return type;
-    }
-
-    public void setType(PropertyType type) {
+        this.starRatings = starRatings;
         this.type = type;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getTelephoneNumber() {
-        return telephoneNumber;
-    }
-
-    public void setTelephoneNumber(String telephoneNumber) {
-        this.telephoneNumber = telephoneNumber;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
         this.description = description;
-    }
-
-    public LocalDate getOpenedIn() {
-        return openedIn;
-    }
-
-    public void setOpenedIn(LocalDate openedIn) {
-        this.openedIn = openedIn;
-    }
-
-    public LocalDate getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDate createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDate getOfferedSince() {
-        return offeredSince;
-    }
-
-    public void setOfferedSince(LocalDate offeredSince) {
-        this.offeredSince = offeredSince;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Property)) return false;
-        Property property = (Property) o;
-        return Objects.equals(getName(), property.getName()) &&
-                Objects.equals(getStars(), property.getStars()) &&
-                Objects.equals(getType(), property.getType()) &&
-                Objects.equals(getLocation(), property.getLocation());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getName(), getStars(), getType(), getLocation());
-    }
-
-    @Override
-    public String toString() {
-        return "Property{" +
-                "id=" + super.getId() +
-                "name='" + name + '\'' +
-                ", stars=" + stars +
-                ", email='" + email + '\'' +
-                ", telephoneNumber='" + telephoneNumber + '\'' +
-                ", description='" + description + '\'' +
-                ", openedIn=" + openedIn +
-                ", createdAt=" + createdAt +
-                ", offeredSince=" + offeredSince +
-                '}';
+        this.country = country;
+        this.region = region;
+        this.street = street;
+        this.houseNumber = houseNumber;
+        this.zip = zip;
+        this.contactName = contactName;
+        this.contactNumber = contactNumber;
+        this.contactEmail = contactEmail;
     }
 }
