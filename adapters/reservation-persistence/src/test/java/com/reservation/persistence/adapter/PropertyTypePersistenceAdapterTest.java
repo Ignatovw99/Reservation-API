@@ -108,4 +108,33 @@ class PropertyTypePersistenceAdapterTest {
                 () -> propertyTypePersistenceAdapter.savePropertyType(propertyType)
         );
     }
+
+    @Test
+    public void findById_whenPropertyTypeExistsWithTheGivenId_shouldReturnIt() {
+        PropertyType propertyType = PropertyType.builder()
+                    .name("Name")
+                    .allowsMultipleRooms(true)
+                    .requiresAlternative(false)
+                    .requiresPrivate(true)
+                .build();
+
+        PropertyType saved = propertyTypeJpaRepository.saveAndFlush(propertyType);
+        Long id = saved.getId();
+
+        PropertyType actual = propertyTypePersistenceAdapter.findById(id);
+
+        assertEquals(id, actual.getId());
+        assertEquals(saved, actual);
+    }
+
+    @Test
+    public void findById_whenPropertyTypeDoesBotExistWithTheGivenId_shouldReturnNull() {
+
+        Long id = 13L;
+        boolean existsById = propertyTypeJpaRepository.existsById(id);
+        assertFalse(existsById);
+
+        PropertyType actual = propertyTypePersistenceAdapter.findById(id);
+        assertNull(actual);
+    }
 }

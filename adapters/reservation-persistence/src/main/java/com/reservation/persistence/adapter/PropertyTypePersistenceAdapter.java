@@ -1,6 +1,7 @@
 package com.reservation.persistence.adapter;
 
 import com.reservation.application.domain.entity.PropertyType;
+import com.reservation.application.port.out.FindPropertyTypeByIdPort;
 import com.reservation.application.port.out.FindPropertyTypeByNamePort;
 import com.reservation.application.port.out.PersistPropertyTypePort;
 import com.reservation.common.component.PersistenceAdapter;
@@ -11,7 +12,10 @@ import lombok.extern.slf4j.Slf4j;
 @PersistenceAdapter
 @RequiredArgsConstructor
 @Slf4j
-class PropertyTypePersistenceAdapter implements PersistPropertyTypePort, FindPropertyTypeByNamePort {
+class PropertyTypePersistenceAdapter implements
+        PersistPropertyTypePort,
+        FindPropertyTypeByNamePort,
+        FindPropertyTypeByIdPort {
 
     private final PropertyTypeJpaRepository propertyTypeJpaRepository;
 
@@ -25,5 +29,12 @@ class PropertyTypePersistenceAdapter implements PersistPropertyTypePort, FindPro
     public PropertyType findPropertyTypeByName(String name) {
         log.info("Fetching Property type by name: {}", name);
         return propertyTypeJpaRepository.findByName(name);
+    }
+
+    @Override
+    public PropertyType findById(Long id) {
+        log.info("Fetching Property type by id: {}", id);
+        return propertyTypeJpaRepository.findById(id)
+                .orElse(null);
     }
 }
