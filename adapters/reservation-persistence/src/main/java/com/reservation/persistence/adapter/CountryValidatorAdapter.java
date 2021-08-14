@@ -1,6 +1,7 @@
 package com.reservation.persistence.adapter;
 
 import com.reservation.application.port.out.CountryValidatorPort;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -9,15 +10,17 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
+@Slf4j
 public class CountryValidatorAdapter implements CountryValidatorPort {
 
-    private final Set<String> isoCountries;
+    private final Set<String> countries;
 
     public CountryValidatorAdapter() {
-        isoCountries = initializeCountries();
+        countries = initializeCountries();
     }
 
     private Set<String> initializeCountries() {
+        log.info("Initializing countries");
         return Arrays.stream(Locale.getISOCountries())
                 .map(isoCountry -> new Locale("", isoCountry)
                         .getDisplayCountry()
@@ -27,7 +30,8 @@ public class CountryValidatorAdapter implements CountryValidatorPort {
 
     @Override
     public boolean isCountryValid(String country) {
+        log.info("Checking if country {} is valid", country);
         String countryLower = country.toLowerCase();
-        return isoCountries.contains(countryLower);
+        return countries.contains(countryLower);
     }
 }

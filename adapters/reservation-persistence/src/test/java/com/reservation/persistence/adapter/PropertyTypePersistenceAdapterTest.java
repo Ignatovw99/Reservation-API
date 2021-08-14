@@ -1,6 +1,9 @@
 package com.reservation.persistence.adapter;
 
 import com.reservation.application.domain.entity.PropertyType;
+import com.reservation.application.port.out.FindPropertyTypeByIdPort;
+import com.reservation.application.port.out.FindPropertyTypeByNamePort;
+import com.reservation.application.port.out.PersistPropertyTypePort;
 import com.reservation.persistence.PersistenceContextTest;
 import com.reservation.persistence.core.repository.PropertyTypeJpaRepository;
 import org.junit.jupiter.api.Test;
@@ -13,7 +16,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class PropertyTypePersistenceAdapterTest {
 
     @Autowired
-    private PropertyTypePersistenceAdapter propertyTypePersistenceAdapter;
+    private FindPropertyTypeByIdPort findPropertyTypeByIdPort;
+
+    @Autowired
+    private FindPropertyTypeByNamePort findPropertyTypeByNamePort;
+
+    @Autowired
+    private PersistPropertyTypePort persistPropertyTypePort;
 
     @Autowired
     private PropertyTypeJpaRepository propertyTypeJpaRepository;
@@ -30,7 +39,7 @@ class PropertyTypePersistenceAdapterTest {
                 .build();
         propertyTypeJpaRepository.saveAndFlush(propertyType);
 
-        PropertyType actualType = propertyTypePersistenceAdapter.findPropertyTypeByName(name);
+        PropertyType actualType = findPropertyTypeByNamePort.findPropertyTypeByName(name);
 
         assertNotNull(actualType);
         assertEquals(propertyType.getId(), actualType.getId());
@@ -43,7 +52,7 @@ class PropertyTypePersistenceAdapterTest {
         long actualCount = propertyTypeJpaRepository.count();
         assertEquals(0, actualCount);
 
-        PropertyType expectedType = propertyTypePersistenceAdapter.findPropertyTypeByName(name);
+        PropertyType expectedType = findPropertyTypeByNamePort.findPropertyTypeByName(name);
         assertNull(expectedType);
     }
 
@@ -67,7 +76,7 @@ class PropertyTypePersistenceAdapterTest {
                 .build();
         assertThrows(
                 DataIntegrityViolationException.class,
-                () -> propertyTypePersistenceAdapter.savePropertyType(propertyType2)
+                () -> persistPropertyTypePort.savePropertyType(propertyType2)
         );
     }
 
@@ -83,7 +92,7 @@ class PropertyTypePersistenceAdapterTest {
                 .build();
         assertNull(propertyType.getId());
 
-        PropertyType savedPropertyType = propertyTypePersistenceAdapter.savePropertyType(propertyType);
+        PropertyType savedPropertyType = persistPropertyTypePort.savePropertyType(propertyType);
         assertNotNull(propertyType.getId());
 
         boolean actual = propertyTypeJpaRepository.existsById(savedPropertyType.getId());
@@ -105,7 +114,7 @@ class PropertyTypePersistenceAdapterTest {
 
         assertThrows(
                 DataIntegrityViolationException.class,
-                () -> propertyTypePersistenceAdapter.savePropertyType(propertyType)
+                () -> persistPropertyTypePort.savePropertyType(propertyType)
         );
     }
 
@@ -121,7 +130,7 @@ class PropertyTypePersistenceAdapterTest {
         PropertyType saved = propertyTypeJpaRepository.saveAndFlush(propertyType);
         Long id = saved.getId();
 
-        PropertyType actual = propertyTypePersistenceAdapter.findById(id);
+        PropertyType actual = findPropertyTypeByIdPort.findById(id);
 
         assertEquals(id, actual.getId());
         assertEquals(saved, actual);
@@ -134,7 +143,7 @@ class PropertyTypePersistenceAdapterTest {
         boolean existsById = propertyTypeJpaRepository.existsById(id);
         assertFalse(existsById);
 
-        PropertyType actual = propertyTypePersistenceAdapter.findById(id);
+        PropertyType actual = findPropertyTypeByIdPort.findById(id);
         assertNull(actual);
     }
 }
