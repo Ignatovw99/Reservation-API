@@ -106,7 +106,7 @@ public class CreatePropertyServiceTest {
     @MockBean
     private CreatePropertyUseCase.UseCaseMapper useCaseMapper;
 
-    private CreatePropertyUseCase.Command createCommand() {
+    public static CreatePropertyUseCase.Command createCommand() {
         return new CreatePropertyUseCase.Command(
                 name,
                 starRatings,
