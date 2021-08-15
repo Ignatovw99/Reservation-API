@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Objects;
 
-@WebAdapter(valueURL = "/api/property-type")
+@WebAdapter(valueURL = "/api/property-types")
 @RequiredArgsConstructor
 @Slf4j
 class PropertyTypeResource {
