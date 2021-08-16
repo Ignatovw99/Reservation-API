@@ -2,13 +2,11 @@ package com.reservation.web.controller;
 
 import com.reservation.application.domain.entity.Property;
 import com.reservation.application.domain.entity.PropertyType;
-import com.reservation.application.port.in.CreatePropertyTypeUseCase;
 import com.reservation.application.port.in.CreatePropertyUseCase;
 import com.reservation.application.service.CreatePropertyServiceTest;
 import com.reservation.application.service.CreatePropertyTypeServiceTest;
 import com.reservation.web.mapper.PropertyApiMapper;
 import com.reservation.web.model.PropertyApi;
-import com.reservation.web.model.PropertyTypeApi;
 import com.reservation.web.model.error.exception.InvalidRequestException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +14,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static com.reservation.application.service.CreatePropertyServiceTest.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(classes = PropertyResource.class)
 public class PropertyResourceTest {

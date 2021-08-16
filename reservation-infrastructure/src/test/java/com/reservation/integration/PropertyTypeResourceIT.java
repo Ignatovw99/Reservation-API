@@ -81,8 +81,8 @@ public class PropertyTypeResourceIT {
                 .andExpect(jsonPath("$.allowsMultipleRooms", is(ALLOWS_MULTIPLE_ROOMS)))
                 .andExpect(jsonPath("$.requiresAlternative", is(REQUIRES_ALTERNATIVE)))
                 .andDo(result -> {
-                    Long id = JsonPath.read(result.getResponse().getContentAsString(), "$.id");
-                    boolean actualResult = propertyTypeRepository.existsById(id);
+                    Integer id = JsonPath.read(result.getResponse().getContentAsString(), "$.id");
+                    boolean actualResult = propertyTypeRepository.existsById(Long.valueOf(id));
                     assertTrue(actualResult);
                 });
     }
