@@ -1,6 +1,7 @@
 package com.reservation.web.controller;
 
 import com.reservation.application.port.in.CreatePropertyTypeUseCase;
+import com.reservation.application.port.in.CreatePropertyUseCase;
 import com.reservation.web.model.error.ApiError;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -16,9 +17,19 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 
     @ExceptionHandler(CreatePropertyTypeUseCase.NonUniquePropertyTypeNameException.class)
-    protected ResponseEntity<ApiError> handlerNonUnique(CreatePropertyTypeUseCase.NonUniquePropertyTypeNameException ex) {
+    protected ResponseEntity<ApiError> handleNonUnique(CreatePropertyTypeUseCase.NonUniquePropertyTypeNameException ex) {
 
         ApiError error = new ApiError(HttpStatus.CONFLICT, ex.getMessage(), ex);
-        return new ResponseEntity<>(error, HttpStatus.CONFLICT);
+        return new ResponseEntity<>(error, error.getStatus());
+    }
+
+    @ExceptionHandler(CreatePropertyUseCase.PropertyInvalidCommandException.class)
+    protected ResponseEntity<ApiError> handleInvalidProperty(CreatePropertyUseCase.PropertyInvalidCommandException ex) {
+
+        HttpStatus status = ex.isConflict()
+                ? HttpStatus.CONFLICT
+                : HttpStatus.BAD_REQUEST;
+        ApiError error = new ApiError(status, ex.getMessage(), ex);
+        return new ResponseEntity<>(error, error.getStatus());
     }
 }

@@ -51,7 +51,7 @@ public interface CreatePropertyUseCase {
         private final String contactNumber;
 
         @NotNull
-        @Pattern(regexp = "[a-zA-Z0-9_]+@[a-z]+\\.[a-z]{2,3}")
+        @Pattern(regexp = "[a-zA-Z0-9_]+@[a-z]+\\.[a-z]{2,3}", message = "Email invalid")
         private final String contactEmail;
 
         public Command(String name,
@@ -82,10 +82,28 @@ public interface CreatePropertyUseCase {
         }
     }
 
-    final class PropertyInvalidCommandException extends RuntimeException {
+    @Getter
+    class PropertyInvalidCommandException extends RuntimeException {
 
-        public PropertyInvalidCommandException(String message) {
+        private final boolean isConflict;
+
+        private PropertyInvalidCommandException(String message, boolean isConflict) {
             super(message);
+            this.isConflict = isConflict;
+        }
+
+        public static final class Conflict extends PropertyInvalidCommandException {
+
+            public Conflict(String message) {
+                super(message, true);
+            }
+        }
+
+        public static final class BadRequest extends PropertyInvalidCommandException {
+
+            public BadRequest(String message) {
+                super(message, false);
+            }
         }
     }
 

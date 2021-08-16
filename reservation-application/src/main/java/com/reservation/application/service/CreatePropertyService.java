@@ -44,7 +44,9 @@ public class CreatePropertyService implements CreatePropertyUseCase {
         Property property = findPropertyByNamePort.findPropertyByName(name);
         if (Objects.nonNull(property)) {
             log.error("Creating property failed, property with name \"{} \" already exists", name);
-            throw new PropertyInvalidCommandException(String.format("Property with name %s already exists", name));
+            throw new PropertyInvalidCommandException.Conflict(
+                    String.format("Property with name %s already exists", name)
+            );
         }
     }
 
@@ -52,7 +54,9 @@ public class CreatePropertyService implements CreatePropertyUseCase {
         boolean isValid = countryValidatorPort.isCountryValid(country);
         if (!isValid) {
             log.error("Creating property failed, country \"{}\" is not valid", country);
-            throw new PropertyInvalidCommandException(String.format("Country %s is not valid", country));
+            throw new PropertyInvalidCommandException.BadRequest(
+                    String.format("Country %s is not valid", country)
+            );
         }
     }
 
@@ -60,7 +64,7 @@ public class CreatePropertyService implements CreatePropertyUseCase {
         PropertyType propertyType = findPropertyTypeByIdPort.findById(propertyTypeId);
         if (Objects.isNull(propertyType)) {
             log.error("Creating property failed, property type with id {} does not exist", propertyTypeId);
-            throw new PropertyInvalidCommandException(
+            throw new PropertyInvalidCommandException.BadRequest(
                     String.format("Property type with id %d cannot be assigned to the property, because it does not exist", propertyTypeId)
             );
         }
