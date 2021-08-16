@@ -72,9 +72,9 @@ public class CreatePropertyServiceTest {
 
     public static final String description = "This is an amazing hotel";
 
-    public static final String country = "USA";
+    public static final String country = "Greece";
 
-    public static final String region = "Las Vegas";
+    public static final String region = "Thessaloniki";
 
     public static final String street = "John Smith";
 

@@ -5,7 +5,6 @@ import com.jayway.jsonpath.JsonPath;
 import com.reservation.application.domain.entity.PropertyType;
 import com.reservation.persistence.core.repository.PropertyTypeJpaRepository;
 import com.reservation.web.model.PropertyTypeApi;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -60,21 +59,20 @@ public class PropertyTypeResourceIT {
                 .build();
     }
 
-    @Disabled
     @Test
     @Transactional
     public void createPropertyType_whenTheRequestIsValid_shouldReturnStatusCodeCreated() throws Exception {
 
         PropertyTypeApi apiModelRequest = PropertyTypeResourceIT.createPropertyTypeApi();
 
-        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post("/api/property-type")
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post("/api/property-types")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(apiModelRequest));
 
         mockMvc.perform(request)
                 .andExpect(status().isCreated())
-                .andExpect(header().string(HttpHeaders.LOCATION, startsWith("/api/property-type/")))
+                .andExpect(header().string(HttpHeaders.LOCATION, startsWith("/api/property-types/")))
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", notNullValue()))
                 .andExpect(jsonPath("$.id", notNullValue()))
@@ -89,7 +87,6 @@ public class PropertyTypeResourceIT {
                 });
     }
 
-    @Disabled
     @Test
     @Transactional
     public void createPropertyType_whenTheRequestContainsId_shouldReturnStatusCodeBadRequest() throws Exception {
@@ -97,7 +94,7 @@ public class PropertyTypeResourceIT {
         PropertyTypeApi apiModelRequest = PropertyTypeResourceIT.createPropertyTypeApi();
         apiModelRequest.setId(3L);
 
-        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post("/api/property-type")
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post("/api/property-types")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(apiModelRequest));
@@ -106,7 +103,6 @@ public class PropertyTypeResourceIT {
                 .andExpect(status().isBadRequest());
     }
 
-    @Disabled
     @Test
     @Transactional
     public void createPropertyType_whenThereIsAlreadyPropertyTypeWithTheGivenName_shouldReturnStatusCodeConflict() throws Exception {
@@ -117,7 +113,7 @@ public class PropertyTypeResourceIT {
         entity.setName(apiModelRequest.getName());
         propertyTypeRepository.saveAndFlush(entity);
 
-        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post("/api/property-type")
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post("/api/property-types")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(apiModelRequest));
