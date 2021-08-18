@@ -28,20 +28,19 @@ public class AppUser extends NumericJpaIdentifier {
     @EqualsAndHashCode.Include
     private String email;
 
-    private String login;
-
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<AppRole> roles;
 
     @Builder
-    public AppUser(Long id, String name, String username, String email, String login, String password) {
+    public AppUser(Long id, String name, String username, String email, String password) {
         super(id);
         this.name = name;
         this.username = username;
         this.email = email;
-        this.login = login;
         this.password = password;
     }
+
+//    TODO: implement login calculation
 }
