@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <!--    Constraints for the table users_roles-->
+
+    <changeSet id="2021-08-20-13:40" author="Lyuboslav Ignatov">
+
+        <addForeignKeyConstraint baseTableName="users_roles"
+                                 baseColumnNames="user_id"
+                                 constraintName="fk__users_roles__users"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id" />
+
+        <addForeignKeyConstraint baseTableName="users_roles"
+                                 baseColumnNames="role_id"
+                                 constraintName="fk__users_roles__roles"
+                                 referencedTableName="roles"
+                                 referencedColumnNames="id" />
+        
+        <addUniqueConstraint tableName="users_roles" columnNames="user_id,role_id" />
+
+    </changeSet>
+
+</databaseChangeLog>
