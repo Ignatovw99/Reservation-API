@@ -16,7 +16,7 @@ import java.util.Objects;
 @UseCase
 @RequiredArgsConstructor
 @Slf4j
-public class CreatePropertyService implements CreatePropertyUseCase {
+class CreatePropertyService implements CreatePropertyUseCase {
 
     private final FindPropertyByNamePort findPropertyByNamePort;
 

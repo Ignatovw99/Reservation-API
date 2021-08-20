@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Component
 @Slf4j
-public class CountryValidatorAdapter implements CountryValidatorPort {
+class CountryValidatorAdapter implements CountryValidatorPort {
 
     private final Set<String> countries;
 
