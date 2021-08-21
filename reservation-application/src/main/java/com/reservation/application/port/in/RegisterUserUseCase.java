@@ -29,6 +29,7 @@ public interface RegisterUserUseCase {
         private final String email;
 
         @NotNull
+        @ToString.Exclude
         private final String password;
 
         public Command(String name, String username, String email, String password) {
