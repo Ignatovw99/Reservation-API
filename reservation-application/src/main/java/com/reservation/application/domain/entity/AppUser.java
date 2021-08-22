@@ -4,6 +4,7 @@ import com.reservation.common.base.NumericJpaIdentifier;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -44,5 +45,9 @@ public class AppUser extends NumericJpaIdentifier {
         this.password = password;
     }
 
-//    TODO: implement login calculation
+    public String getLogin() {
+        return Objects.isNull(username)
+                ? email
+                : username;
+    }
 }
