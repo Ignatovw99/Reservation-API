@@ -28,6 +28,12 @@ class UserPersistenceAdapter implements FindUserPort, PersistUserPort {
     }
 
     @Override
+    public AppUser findUserByLogin(String login) {
+        log.info("Fetching user by login: {}", login);
+        return appUserRepository.findByUsernameOrEmail(login, login);
+    }
+
+    @Override
     public AppUser saveUser(AppUser user) {
         log.info("Persisting user: {}", user);
         return appUserRepository.saveAndFlush(user);

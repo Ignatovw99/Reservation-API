@@ -65,6 +65,46 @@ public class UserPersistenceAdapterTest {
     }
 
     @Test
+    public void findUserByLogin_whenLoginIsEqualToEmail_shouldReturnTheUser() {
+        AppUser user = RegisterUserServiceTest.createAppUser();
+        user.setUsername(null);
+
+        appUserRepository.saveAndFlush(user);
+        String login = user.getEmail();
+        AppUser actual = userPersistenceAdapter.findUserByLogin(login);
+
+        assertAll(
+                () -> assertNotNull(actual),
+                () -> assertEquals(login, actual.getLogin()),
+                () -> assertEquals(login, actual.getEmail())
+        );
+    }
+
+    @Test
+    public void findUserByLogin_whenLoginIsEqualToUsername_shouldReturnTheUser() {
+        AppUser user = RegisterUserServiceTest.createAppUser();
+        appUserRepository.saveAndFlush(user);
+        String login = user.getUsername();
+        AppUser actual = userPersistenceAdapter.findUserByLogin(login);
+
+        assertAll(
+                () -> assertNotNull(actual),
+                () -> assertEquals(login, actual.getLogin()),
+                () -> assertEquals(login, actual.getUsername())
+        );
+    }
+
+    @Test
+    public void findUserByLogin_whenLoginIsNotEqualToUsernameNeitherToEmail_shouldReturnNull() {
+        AppUser user = RegisterUserServiceTest.createAppUser();
+        appUserRepository.saveAndFlush(user);
+        String login = user.getEmail() + user.getUsername();
+        AppUser actual = userPersistenceAdapter.findUserByLogin(login);
+
+        assertNull(actual);
+    }
+
+    @Test
     public void saveUser_whenNameIsNull_shouldThrowException() {
         AppUser appUser = RegisterUserServiceTest.createAppUser();
         appUser.setName(null);
