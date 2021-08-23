@@ -7,4 +7,6 @@ public interface FindUserPort {
     AppUser findUserByUsername(String username);
 
     AppUser findUserByEmail(String email);
+
+    AppUser findUserByLogin(String login);
 }
