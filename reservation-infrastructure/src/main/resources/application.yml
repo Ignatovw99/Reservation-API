@@ -20,3 +20,20 @@ reservation-api:
     persistence: persistence
     application: domain
     common: utils
+  security:
+    jwt:
+      secret: secret123456
+      prefix-header: Bearer
+      access-token:
+        expiry: 10
+        header: Access-Token
+      refresh-token:
+        expiry: 30
+        header: Refresh-Token
+      authorities-claim: authorities
+    login:
+      url: /api/login
+      username-parameter: login
+      password-parameter: password
+    authorization-error-header: Authorization-Error
+
