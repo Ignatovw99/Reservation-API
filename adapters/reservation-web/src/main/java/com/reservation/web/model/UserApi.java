@@ -1,8 +1,10 @@
 package com.reservation.web.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.reservation.common.base.NumericIdentifier;
 import lombok.*;
 
+@JsonIgnoreProperties(value = "password", allowSetters = true)
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
