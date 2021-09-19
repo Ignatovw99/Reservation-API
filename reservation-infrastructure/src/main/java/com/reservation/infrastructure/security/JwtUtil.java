@@ -8,23 +8,19 @@ import java.util.Date;
 
 public final class JwtUtil {
 
-    private static final String AUTHORITIES_CLAIM = "authorities";
-
-    public static String generateAccessToken(User user, String issuer, Algorithm algorithm) {
-//        TODO: extract expires at to a config file / app properties
+    public static String generateAccessToken(User user, String issuer, Algorithm algorithm, SecurityProperties.Jwt jwtProperties) {
         return JWT.create()
                 .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 10 * 60 * 1000))
+                .withExpiresAt(new Date(System.currentTimeMillis() + jwtProperties.getAccessToken().getExpiry() * 60 * 1000))
                 .withIssuer(issuer)
-                .withClaim(AUTHORITIES_CLAIM, SecurityUtil.extractAuthoritiesFrom(user))
+                .withClaim(jwtProperties.getAuthoritiesClaim(), SecurityUtil.extractAuthoritiesFrom(user))
                 .sign(algorithm);
     }
 
-    public static String generateRefreshToken(String subject, String issuer, Algorithm algorithm) {
-//        TODO: extract expires at to a config file / app properties
+    public static String generateRefreshToken(String subject, String issuer, Algorithm algorithm, SecurityProperties.Jwt.Token refreshTokenProperties) {
         return JWT.create()
                 .withSubject(subject)
-                .withExpiresAt(new Date(System.currentTimeMillis() + 30 * 60 * 1000))
+                .withExpiresAt(new Date(System.currentTimeMillis() + refreshTokenProperties.getExpiry() * 60 * 1000))
                 .withIssuer(issuer)
                 .sign(algorithm);
     }

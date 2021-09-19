@@ -17,31 +17,22 @@ import java.util.stream.Collectors;
 
 public final class SecurityUtil {
 
-//    TODO: extract this properties to a configuration file
-    private static final String LOGIN_PARAM = "login";
-
-    private static final String PASSWORD_PARAM = "password";
-
-    private static final String ACCESS_TOKEN_HEADER = "Access-Token";
-
-    private static final String REFRESH_TOKEN_HEADER = "Refresh-Token";
-
-    public static LoginRequest buildLoginRequest(HttpServletRequest request) {
+    public static LoginRequest buildLoginRequest(HttpServletRequest request, SecurityProperties.Login loginProperties) {
 //        TODO: add validation for empty and null
-        String login = request.getParameter(LOGIN_PARAM);
-        String password = request.getParameter(PASSWORD_PARAM);
+        String login = request.getParameter(loginProperties.getUsernameParameter());
+        String password = request.getParameter(loginProperties.getPasswordParameter());
         return new LoginRequest(login, password);
     }
 
-    public static void buildLoginResponse(HttpServletResponse response, LoginResponse tokens) throws IOException {
+    public static void buildLoginResponse(HttpServletResponse response, LoginResponse tokens, SecurityProperties.Jwt.Token accessTokenProps, SecurityProperties.Jwt.Token refreshTokenProps) throws IOException {
 
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 
 //        Headers
-        response.setHeader(ACCESS_TOKEN_HEADER, tokens.getAccessToken());
-        response.setHeader(REFRESH_TOKEN_HEADER, tokens.getRefreshToken());
+        response.setHeader(accessTokenProps.getHeader(), tokens.getAccessToken());
+        response.setHeader(refreshTokenProps.getHeader(), tokens.getRefreshToken());
 
-//        Body
+//        Body  -> the object can be HashMap too
         new ObjectMapper()
                 .writeValue(response.getOutputStream(), tokens);
     }

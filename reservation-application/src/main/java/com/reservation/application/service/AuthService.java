@@ -25,6 +25,6 @@ public class AuthService implements AuthUseCase {
             throw new UsernameNotFoundException(String.format(Constants.USERNAME_DOES_NOT_EXIST, login));
         }
 //        TODO: get user authorities
-        return new User(login, "null", new ArrayList<>());
+        return new User(login, appUser.getPassword(), new ArrayList<>());
     }
 }
