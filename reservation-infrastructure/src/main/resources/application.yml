@@ -25,15 +25,16 @@ reservation-api:
       secret: secret123456
       prefix-header: Bearer
       access-token:
-        expiry: 10
+        expiry: 10    #minutes
         header: Access-Token
       refresh-token:
-        expiry: 30
+        expiry: 30     #minutes
         header: Refresh-Token
       authorities-claim: authorities
     login:
       url: /api/login
       username-parameter: login
       password-parameter: password
+    authentication-error-header: Authentication-Error
     authorization-error-header: Authorization-Error
 

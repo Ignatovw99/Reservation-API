@@ -15,6 +15,8 @@ public class SecurityProperties {
 
     private String authorizationErrorHeader;
 
+    private String authenticationErrorHeader;
+
     @Data
     public static class Jwt {
 
