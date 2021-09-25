@@ -20,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 @Slf4j
@@ -49,6 +50,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
 
         User user = SecurityUtil.extractUserFromAuthentication(authentication);
+        if (Objects.isNull(user)) {
+            SecurityUtil.buildUnsuccessfulLoginResponse(response);
+            return;
+        }
         SecurityProperties.Jwt propertiesJwt = securityProperties.getJwt();
 
         String issuer = request.getRequestURI();
